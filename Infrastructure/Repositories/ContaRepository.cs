@@ -15,7 +15,7 @@ namespace Infrastructure.Repositories
 
         public async Task<Conta> CriarContaAsync(Conta conta)
         {
-            await context.Contas.AddAsync(conta);
+            await context.Contas.AddAsync(conta);            
             await context.SaveChangesAsync();
             return conta;
         }
@@ -29,7 +29,7 @@ namespace Infrastructure.Repositories
 
 
         public async Task<Conta?> RecuperarPorIdAsync(int id) =>
-            await context.Contas.FirstOrDefaultAsync(c => c.Id == id);
+            await context.Contas.Include(c => c.ContasFilhas).FirstOrDefaultAsync(c => c.Id == id);
 
     }
 }

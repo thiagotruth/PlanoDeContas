@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(PlanoDeContasContext))]
-    partial class PlanoDeContasContextModelSnapshot : ModelSnapshot
+    [Migration("20240506190932_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,10 +59,12 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Models.Conta", b =>
                 {
-                    b.HasOne("Domain.Models.Conta", null)
+                    b.HasOne("Domain.Models.Conta", "ContaPai")
                         .WithMany("ContasFilhas")
                         .HasForeignKey("IdContaPai")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("ContaPai");
                 });
 
             modelBuilder.Entity("Domain.Models.Conta", b =>

@@ -4,7 +4,9 @@ namespace Domain.Interfaces
 {
     public interface IContaService
     {
-        Task CriarContaAsync(Conta conta);
+        Task<Conta> CriarContaAsync(Conta conta);
+        Task<Conta?> RecuperarPorIdAsync(int id);
+        Task<Conta?> RecuperarPorCodigoAsync(string codigo);
         Task ExcluirContaAsync(int idConta);
     }
 }

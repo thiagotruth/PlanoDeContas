@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(PlanoDeContasContext))]
-    [Migration("20240506144801_Initial")]
-    partial class Initial
+    [Migration("20240506194657_contaPaiid")]
+    partial class contaPaiid
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,13 +36,11 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("AceitaLancamento")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Codigo")
-                        .HasColumnType("int");
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ContaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdPai")
+                    b.Property<int?>("IdContaPai")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -54,7 +52,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContaId");
+                    b.HasIndex("IdContaPai");
 
                     b.ToTable("Contas");
                 });
@@ -63,7 +61,8 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.Models.Conta", null)
                         .WithMany("ContasFilhas")
-                        .HasForeignKey("ContaId");
+                        .HasForeignKey("IdContaPai")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Domain.Models.Conta", b =>

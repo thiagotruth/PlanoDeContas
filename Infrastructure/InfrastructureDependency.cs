@@ -18,7 +18,7 @@ namespace Infrastructure
             var dbName = Environment.GetEnvironmentVariable("DB_NAME");
             var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
 
-            var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword}";
+            var connectionString = @"Data Source=(localdb)\Local;Initial Catalog=PlanoDeContas;User ID=sa;Password=pa$$word123#";//$"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword}";
 
             services.AddDbContext<PlanoDeContasContext>(opt => opt.UseSqlServer(connectionString));
             services.AddScoped<IContaRepository, ContaRepository>();

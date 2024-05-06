@@ -35,5 +35,16 @@ namespace Infrastructure
             }
         }
         public DbSet<Conta> Contas { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Conta>()
+            .HasMany(c => c.ContasFilhas)
+            .WithOne()
+            .HasForeignKey(c => c.IdContaPai)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

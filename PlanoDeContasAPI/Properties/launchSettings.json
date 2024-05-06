@@ -28,7 +28,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DB_SA_PASSWORD": "pa$$word123#",
         "DB_NAME": "PlanoDeContas",
-        "DB_HOST": "DESKTOP-GV8FPF2\\LOCALDB#3B236263"
+        "DB_HOST": "(localdb)\\Local"
       }
     }
   },

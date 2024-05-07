@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{FE34F8E6-38C5-4BB1-8D45-5AB183A7ADFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanoDeContas.UnitTests", "PlanoDeContas.UnitTests\PlanoDeContas.UnitTests.csproj", "{C21D1BBF-C825-4D95-BD39-DBEF1D22F9E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FE34F8E6-38C5-4BB1-8D45-5AB183A7ADFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE34F8E6-38C5-4BB1-8D45-5AB183A7ADFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE34F8E6-38C5-4BB1-8D45-5AB183A7ADFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C21D1BBF-C825-4D95-BD39-DBEF1D22F9E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C21D1BBF-C825-4D95-BD39-DBEF1D22F9E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C21D1BBF-C825-4D95-BD39-DBEF1D22F9E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C21D1BBF-C825-4D95-BD39-DBEF1D22F9E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

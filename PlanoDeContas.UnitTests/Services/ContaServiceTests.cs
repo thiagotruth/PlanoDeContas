@@ -159,5 +159,46 @@ namespace PlanoDeContas.UnitTests.Services
             // Act & Assert
             Assert.ThrowsAsync<ArgumentException>(async () => await contaService.SugerirProximoCodigoAsync(contaId));
         }
+
+        [Test]
+        public async Task RecuperarTodasAsync_DeveRetornarTodasAsContas()
+        {
+            // Arrange
+            var contas = new List<Conta>
+        {
+            new Conta { Id = 1, Nome = "Conta 1" },
+            new Conta { Id = 2, Nome = "Conta 2" },
+            new Conta { Id = 3, Nome = "Conta 3" }
+        };
+            mockContaRepository.Setup(repo => repo.RecuperarTodasAsync()).ReturnsAsync(contas);
+
+            // Act
+            var result = await contaService.RecuperarTodasAsync();
+
+            // Assert
+            Assert.That(result.Count(), Is.EqualTo(contas.Count));
+            Assert.That(contas.SequenceEqual(result), Is.True);
+        }
+
+        [Test]
+        public async Task FiltrarPorNomeAsync_DeveRetornarContasComNomeCorrespondente()
+        {
+            // Arrange
+            string nome = "Conta 1";
+            var contas = new List<Conta>
+        {
+            new Conta { Id = 1, Nome = "Conta 1" },
+            new Conta { Id = 2, Nome = "Conta 2" },
+            new Conta { Id = 3, Nome = "Conta 1" }
+        };
+            mockContaRepository.Setup(repo => repo.FiltrarPorNomeAsync(nome)).ReturnsAsync(contas.Where(c => c.Nome == nome));
+
+            // Act
+            var result = await contaService.FiltrarPorNomeAsync(nome);
+
+            // Assert
+            Assert.That(result.Count(), Is.EqualTo(2));
+            Assert.That(result.All(c => c.Nome == nome), Is.True);
+        }
     }
 }

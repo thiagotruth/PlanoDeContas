@@ -26,6 +26,16 @@ namespace Application.Services
             await _contaRepository.ExcluirContaAsync(idConta);
         }
 
+        public async Task<IEnumerable<Conta>> RecuperarTodasAsync()
+        {
+            return await _contaRepository.RecuperarTodasAsync();
+        }
+
+        public async Task<IEnumerable<Conta>> FiltrarPorNomeAsync(string nome)
+        {
+            return await _contaRepository.FiltrarPorNomeAsync(nome);
+        }
+
         public async Task<Conta?> RecuperarPorCodigoAsync(string codigo)
         {
             return await _contaRepository.RecuperarPorCodigoAsync(codigo);
@@ -121,6 +131,5 @@ namespace Application.Services
             if (contaPai is not null && contaPai.TipoConta != conta.TipoConta)
                 throw new ArgumentException("Erro: A conta a ser inserida não é do mesmo tipo da conta pai.");
         }
-
     }
 }

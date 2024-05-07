@@ -19,6 +19,33 @@ namespace PlanoDeContasAPI.Controllers
             this.mapper = mapper;
         }
 
+        [HttpGet()]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                var result = await _contaService.RecuperarTodasAsync();
+                return Ok(mapper.Map<IEnumerable<ContaListaDto>>(result));
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("filter")]
+        public async Task<IActionResult> FilterByName([FromQuery] string name)
+        {
+            try
+            {
+                var result = await _contaService.FiltrarPorNomeAsync(name);
+                return Ok(mapper.Map<IEnumerable<ContaListaDto>>(result));
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)

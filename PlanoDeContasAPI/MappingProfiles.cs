@@ -11,6 +11,8 @@ namespace PlanoDeContasAPI
         {
             CreateMap<ContaDto, Conta>();
             CreateMap<Conta, ContaDto>();
+            CreateMap<Conta, ContaListaDto>();
+            CreateMap<ContaListaDto, Conta>();
         }
     }
 }

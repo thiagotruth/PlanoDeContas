@@ -3,9 +3,6 @@ using AutoMapper;
 using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PlanoDeContasAPI.Controllers
 {
@@ -38,7 +35,7 @@ namespace PlanoDeContasAPI.Controllers
         }
 
         [HttpGet("codigo/{codigo}")]
-        public async Task<IActionResult> GetById(string codigo)
+        public async Task<IActionResult> GetByCode(string codigo)
         {
             try
             {
@@ -66,8 +63,31 @@ namespace PlanoDeContasAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                await _contaService.ExcluirContaAsync(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}/proximocodigo")]
+        public async Task<IActionResult> SugerirProximoCodigo(int id)
+        {
+            try
+            {
+                return Ok(await _contaService.SugerirProximoCodigoAsync(id));
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

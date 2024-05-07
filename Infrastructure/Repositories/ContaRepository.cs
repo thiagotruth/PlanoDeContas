@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Infrastructure.Repositories
 {
@@ -12,6 +13,9 @@ namespace Infrastructure.Repositories
         {
             this.context = context;
         }
+
+        public async Task<bool> CodigoExisteAsync(string codigo) =>
+            await context.Contas.AnyAsync(c => c.Codigo == codigo);
 
         public async Task<Conta> CriarContaAsync(Conta conta)
         {
@@ -30,6 +34,9 @@ namespace Infrastructure.Repositories
 
         public async Task<Conta?> RecuperarPorIdAsync(int id) =>
             await context.Contas.Include(c => c.ContasFilhas).FirstOrDefaultAsync(c => c.Id == id);
+
+        public async Task<IEnumerable<string>> RecuperarTodosOsCodigosAsync() =>
+            await context.Contas.Select(c => c.Codigo).ToListAsync();
 
     }
 }

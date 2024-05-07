@@ -8,5 +8,6 @@ namespace Domain.Interfaces
         Task<Conta?> RecuperarPorIdAsync(int id);
         Task<Conta?> RecuperarPorCodigoAsync(string codigo);
         Task ExcluirContaAsync(int idConta);
+        Task<string> SugerirProximoCodigoAsync(int contaId);
     }
 }
